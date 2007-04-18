@@ -78,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 
 if [ -n "`/usr/bin/getgid clamav`" ]; then
     echo "Adding clamav to havp group."
-    /usr/sbin/usermod -G clamav havp 1>&2
+    /usr/sbin/usermod -G havp clamav 1>&2
     %service clamd restart
 fi
 
