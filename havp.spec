@@ -21,8 +21,10 @@ Requires(postun):	/usr/sbin/userdel
 Requires(postun,pre):	/usr/sbin/usermod
 Requires(pre):	/bin/id
 Requires(pre):	/usr/bin/getgid
+Requires(pre):	/usr/lib/rpm/user_group.sh
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
+Requires(pre):	/usr/sbin/usermod
 Requires:	clamav
 Requires:	logrotate
 Provides:	group(havp)
@@ -75,11 +77,10 @@ rm -rf $RPM_BUILD_ROOT
 %pre
 %groupadd -g 215 havp
 %useradd -u 215 -d /tmp -s /bin/false -c "HTTP Antivirus Proxy" -g havp havp
-
-if [ -n "`/usr/bin/getgid clamav`" ]; then
-    echo "Adding clamav to havp group."
-    /usr/sbin/usermod -G havp clamav 1>&2
-    %service clamd restart
+m=$(%addusertogroup clamav havp)
+if [ -n "$m" ]; then
+	echo >&2 "$m"
+	%service -q clamd restart
 fi
 
 %post
