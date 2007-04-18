@@ -23,6 +23,7 @@ Requires(pre):	/bin/id
 Requires(pre):	/usr/bin/getgid
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
+Requires:	clamav
 Requires:	logrotate
 Provides:	group(havp)
 Provides:	user(havp)
@@ -76,8 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 %useradd -u 215 -d /tmp -s /bin/false -c "HTTP Antivirus Proxy" -g havp havp
 
 if [ -n "`/usr/bin/getgid clamav`" ]; then
-    echo "Adding havp to clamav group."
+    echo "Adding clamav to havp group."
     /usr/sbin/usermod -G clamav havp 1>&2
+    %service clamd restart
 fi
 
 %post
