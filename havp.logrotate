@@ -1,0 +1,7 @@
+/var/log/havp/*.log {
+	olddir /var/log/archive/havp
+	create 640 havp root
+	postrotate
+		/bin/killall -HUP havp
+	endscript
+}

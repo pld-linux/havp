@@ -1,0 +1,74 @@
+#!/bin/sh
+#
+# havp		havp (HTTP Antivirus Proxy)
+#
+# chkconfig:	345 65 35
+#
+# description:	havp is an HTTP antivirus proxy.
+#
+# processname:	havp
+# pidfile:      /var/run/havp/havp.pid
+#
+
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get service config
+[ -f /etc/sysconfig/havp ] && . /etc/sysconfig/havp
+[ -z "$HAVP_CONFIG" ] && HAVP_CONFIG=/etc/havp/havp.config
+
+start() {
+	if [ ! -f /var/lock/subsys/havp ]; then
+		msg_starting 'HTTP Antivirus Proxy'
+		daemon /usr/sbin/havp -c "$HAVP_CONFIG"
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/havp
+	else
+		msg_already_running 'HTTP Antivirus Proxy'
+	fi
+}
+
+stop() {
+	if [ -f /var/lock/subsys/havp ]; then
+		msg_stopping 'HTTP Antivirus Proxy'
+		killproc --pidfile havp/havp.pid havp
+		rm -f /var/run/havp/havp.pid /var/lock/subsys/havp >/dev/null 2>&1
+	else
+		msg_not_running 'HTTP Antivirus Proxy'
+	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart)
+	stop
+	start
+	;;
+  status)
+	status havp
+	exit $?
+	;;
+  reload|force-reload)
+	if [ -f /var/lock/subsys/havp ]; then
+		msg_reloading 'HTTP Antivirus Proxy'
+		killproc havp -HUP
+		RETVAL=$?
+	else
+		msg_not_running 'HTTP Antivirus Proxy'
+		RETVAL=7
+	fi
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
