@@ -1,4 +1,3 @@
-#
 Summary:	HTTP Antivirus Proxy
 Summary(pl.UTF-8):	Antywirusowe Proxy HTTP
 Name:		havp
@@ -44,7 +43,7 @@ HAVP (HTTP Antivirus Proxy) jest serwerem proxy z antywirusem. Głownym
 celem jest ciągłe i nie blokujące ściągania skanowanie ruchu HTTP.
 
 HAVP może działać jako proxy nadrzędne lub transparentne. Może też być
-używane w połączeniu ze squid'em lub samodzielnie.
+używane w połączeniu ze squidem lub samodzielnie.
 
 %prep
 %setup -q
