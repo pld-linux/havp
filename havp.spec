@@ -25,7 +25,7 @@ Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires(pre):	/usr/sbin/usermod
 Requires:	clamav
-Requires:	logrotate >= 3.7.4
+Requires:	logrotate >= 3.7-4
 Provides:	group(havp)
 Provides:	user(havp)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
