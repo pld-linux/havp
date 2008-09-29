@@ -10,6 +10,9 @@ Source0:	http://www.server-side.de/download/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}.logrotate
 URL:		http://www.server-side.de/
+# http://securitytracker.com/alerts/2008/Sep/1020900.html
+# upgrade to 0.89
+BuildRequires:	security(CVE-2008-3688)
 BuildRequires:	autoconf
 BuildRequires:	clamav-devel
 BuildRequires:	libstdc++-devel
