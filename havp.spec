@@ -4,7 +4,7 @@ Name:		havp
 Version:	0.87
 Release:	1
 License:	GPL v2
-Group:		Networking/Daemons
+Group:		Networking/Daemons/HTTP
 Source0:	http://www.server-side.de/download/%{name}-%{version}.tar.gz
 # Source0-md5:	88ddc4dc9ca4af5de4784c916a0766c0
 Source1:	%{name}.init
