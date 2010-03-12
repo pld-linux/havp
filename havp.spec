@@ -1,18 +1,18 @@
 Summary:	HTTP Antivirus Proxy
 Summary(pl.UTF-8):	Antywirusowe Proxy HTTP
 Name:		havp
-Version:	0.87
+Version:	0.91
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.server-side.de/download/%{name}-%{version}.tar.gz
-# Source0-md5:	88ddc4dc9ca4af5de4784c916a0766c0
+# Source0-md5:	b7ded9311cef36055d76ba3ce634b6ae
 Source1:	%{name}.init
 Source2:	%{name}.logrotate
 URL:		http://www.server-side.de/
 # http://securitytracker.com/alerts/2008/Sep/1020900.html
 # upgrade to 0.89
-BuildRequires:	security(CVE-2008-3688)
+#BuildRequires:	security(CVE-2008-3688)
 BuildRequires:	autoconf
 BuildRequires:	clamav-devel
 BuildRequires:	libstdc++-devel
