@@ -1,12 +1,12 @@
 Summary:	HTTP Antivirus Proxy
 Summary(pl.UTF-8):	Antywirusowe Proxy HTTP
 Name:		havp
-Version:	0.91
+Version:	0.92
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.server-side.de/download/%{name}-%{version}.tar.gz
-# Source0-md5:	b7ded9311cef36055d76ba3ce634b6ae
+# Source0-md5:	5d7be4a702ced59a6a2687b044c30da3
 Source1:	%{name}.init
 Source2:	%{name}.logrotate
 URL:		http://www.server-side.de/
