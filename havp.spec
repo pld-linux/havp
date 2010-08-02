@@ -10,9 +10,6 @@ Source0:	http://www.server-side.de/download/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}.logrotate
 URL:		http://www.server-side.de/
-# http://securitytracker.com/alerts/2008/Sep/1020900.html
-# upgrade to 0.89
-#BuildRequires:	security(CVE-2008-3688)
 BuildRequires:	autoconf
 BuildRequires:	clamav-devel
 BuildRequires:	libstdc++-devel
@@ -58,18 +55,16 @@ używane w połączeniu ze squidem lub samodzielnie.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,logrotate.d} \
+	$RPM_BUILD_ROOT/var/run/%{name} \
+	$RPM_BUILD_ROOT/var/log/{,archive/}%{name}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
-
-install -d $RPM_BUILD_ROOT/etc/logrotate.d
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/logrotate.d/%{name}
 
-install -d $RPM_BUILD_ROOT/var/run/%{name}
-install -d $RPM_BUILD_ROOT/var/log/%{name}
-install -d $RPM_BUILD_ROOT/var/log/archive/%{name}
 touch $RPM_BUILD_ROOT/var/log/%{name}/access.log
 touch $RPM_BUILD_ROOT/var/log/%{name}/%{name}.log
 
